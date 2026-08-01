@@ -1,19 +1,29 @@
 # nuChain deployments
 
 ## WATTx L1 (chain 22356, EVM) — LIVE
-| Contract | Address | Notes |
-|---|---|---|
-| NuChainBridge | `0xcf0fc8662b54a3f222bd9dedf6cb35c42fa1e896` | deployed 2026-08-01, tx `78d6a800813e0a47fe5c76f7f8562245206873b76dd4934f53b69d406166d6e4`, ctor(relayerBond=100 WTX, epochBlocks=600), gas 1,563,948, status OK |
+| Contract | Address |
+|---|---|
+| NuChainBridge | `0xcf0fc8662b54a3f222bd9dedf6cb35c42fa1e896` |
 
-## nuChain (EVM 28277) — pending public devnet
-| Contract | Address | Notes |
+## nuChain (EVM 28277, live on Legion) — LIVE
+| Contract | Address | Role |
 |---|---|---|
-| MandateToken | `0x3D641a2791533B4A0000345eA8d509d01E1ec301` | proven on local devnet |
-| WrappedWTX | TBD | deploy after bridge, register with x/erc20 |
-| WTXOFTAdapter | TBD | LayerZero phase 3 |
+| WrappedWTX (wWTX) | `0x3D641a2791533B4A0000345eA8d509d01E1ec301` | WTX on nuChain, 1:1, minted by relayer on WATTx lock |
+| OmniBridgeRouter | `0x07Aa076883658B7ED99D25b1E6685808372C8fE2` | universal LayerZero/WTX/IBC router |
 
-## Next wiring
-1. Deploy WrappedWTX on nuChain; `WrappedWTX.setBridge(relayer)`.
-2. Bond a relayer on NuChainBridge (`bondRelayer{value:100 WTX}`), run anchor-relayer.js.
-3. Test round-trip: lockWTX on WATTx -> mint wWTX on nuChain -> IBC.
-4. When circuits built: `NuChainBridge.setVerifier(PersonhoodVerifier)` / epoch verifier.
+### Wired & proven (2026-08-01)
+- wWTX minted (WATTx→nuChain leg): relayer mint path works.
+- Router registered `keccak("WTX")` → wWTX in **LockRelease** mode (nuChain locks
+  wWTX; the remote chain mints WTX-ERC20).
+- Router linked to NuChainBridge on WATTx.
+- Route set: WTX → Base Sepolia (LZ EID 40245), peer pending.
+- **Outbound proven**: `sendOut` of 100 wWTX locked it in the router
+  (user 1000→900, router 0→100). Only the LayerZero Endpoint wiring + the
+  remote peer OFT remain to complete a real cross-chain delivery.
+
+## Remaining to finish a live WTX→Ethereum/Base delivery
+1. Vendor LayerZero Endpoint V2, deploy on nuChain, `router.setEndpoint(...)`.
+2. Deploy a peer OFT on the remote testnet (Base Sepolia), register under
+   `keccak("WTX")`, `router.setRoute(...peer...)`.
+3. Enable `x/erc20` and register wWTX as a token pair for the IBC door.
+4. Run the WATTx→nuChain relayer (watch NuChainBridge.WTXLocked → mint wWTX).
