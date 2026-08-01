@@ -1,0 +1,31 @@
+{
+  "_comment": "Vidulum App asset config for nuChain + wWTX. Vidulum is a multi-asset Cosmos-capable wallet; this registers nuChain so users can hold NU and receive WTX bridged in as wWTX, then IBC it across Cosmos.",
+  "asset": {
+    "name": "nuChain",
+    "ticker": "NU",
+    "chainId": "nuchain_28277-1",
+    "coinType": 60,
+    "prefix": "nu",
+    "denom": "anu",
+    "decimals": 18,
+    "logo": "https://raw.githubusercontent.com/nucash-mining/nuchain/main/registry/images/nuchain.png",
+    "endpoints": {
+      "rpc": "https://rpc.nuchain.nucash.dev",
+      "rest": "https://api.nuchain.nucash.dev",
+      "evmJsonRpc": "https://evm.nuchain.nucash.dev"
+    },
+    "gasPrice": "0.025anu",
+    "features": ["ibc-transfer", "eth-secp256k1", "evm"]
+  },
+  "bridgedAssets": [
+    {
+      "name": "Wrapped WTX",
+      "ticker": "WTX",
+      "denom": "erc20/wWTX",
+      "decimals": 8,
+      "origin": "WATTx (chain 22356) via NuChainBridge",
+      "note": "Lock WTX on WATTx -> mint wWTX on nuChain -> IBC across Cosmos. Burn wWTX to withdraw WTX home."
+    }
+  ],
+  "_endpoints_note": "DNS placeholders under nucash.dev — swap for real hosts at public testnet launch; local dev uses 127.0.0.1:26657 / :1317 / :18545."
+}

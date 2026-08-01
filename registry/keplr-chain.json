@@ -1,0 +1,29 @@
+{
+  "chainId": "nuchain_28277-1",
+  "chainName": "nuChain",
+  "rpc": "http://127.0.0.1:26657",
+  "rest": "http://127.0.0.1:1317",
+  "bip44": { "coinType": 60 },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "nu",
+    "bech32PrefixAccPub": "nupub",
+    "bech32PrefixValAddr": "nuvaloper",
+    "bech32PrefixValPub": "nuvaloperpub",
+    "bech32PrefixConsAddr": "nuvalcons",
+    "bech32PrefixConsPub": "nuvalconspub"
+  },
+  "currencies": [
+    { "coinDenom": "NU", "coinMinimalDenom": "anu", "coinDecimals": 18 },
+    { "coinDenom": "WTX", "coinMinimalDenom": "erc20/wWTX", "coinDecimals": 8 }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "NU",
+      "coinMinimalDenom": "anu",
+      "coinDecimals": 18,
+      "gasPriceStep": { "low": 0.01, "average": 0.025, "high": 0.04 }
+    }
+  ],
+  "stakeCurrency": { "coinDenom": "NU", "coinMinimalDenom": "anu", "coinDecimals": 18 },
+  "features": ["eth-address-gen", "eth-key-sign", "ibc-transfer", "ibc-go"]
+}

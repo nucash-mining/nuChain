@@ -1,0 +1,38 @@
+{
+  "$schema": "../assetlist.schema.json",
+  "chain_name": "nuchain",
+  "assets": [
+    {
+      "description": "The native staking and gas token of nuChain.",
+      "denom_units": [
+        { "denom": "anu", "exponent": 0 },
+        { "denom": "NU", "exponent": 18 }
+      ],
+      "base": "anu",
+      "name": "nuChain",
+      "display": "NU",
+      "symbol": "NU",
+      "type_asset": "sdk.coin"
+    },
+    {
+      "description": "WATTx (WTX) bridged to nuChain via NuChainBridge — locked on the WATTx EVM, minted 1:1 as wWTX (8 decimals, satoshi-exact), converted to a native denom by the x/erc20 module for IBC transport across the Cosmos ecosystem.",
+      "denom_units": [
+        { "denom": "erc20/wWTX", "exponent": 0, "aliases": ["swtx"] },
+        { "denom": "WTX", "exponent": 8 }
+      ],
+      "base": "erc20/wWTX",
+      "name": "Wrapped WTX",
+      "display": "WTX",
+      "symbol": "wWTX",
+      "type_asset": "erc20",
+      "address": "TBD-at-deployment",
+      "traces": [
+        {
+          "type": "bridge",
+          "counterparty": { "chain_name": "wattx", "base_denom": "satoshi-WTX" },
+          "provider": "NuChainBridge (bonded relayers, zk validity proofs phase 2)"
+        }
+      ]
+    }
+  ]
+}

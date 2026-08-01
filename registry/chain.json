@@ -1,0 +1,45 @@
+{
+  "$schema": "../chain.schema.json",
+  "chain_name": "nuchain",
+  "status": "upcoming",
+  "network_type": "testnet",
+  "pretty_name": "nuChain",
+  "chain_type": "cosmos",
+  "chain_id": "nuchain_28277-1",
+  "bech32_prefix": "nu",
+  "daemon_name": "nuchaind",
+  "node_home": "$HOME/.nuchaind",
+  "key_algos": ["ethsecp256k1"],
+  "extra_codecs": ["ethermint"],
+  "slip44": 60,
+  "fees": {
+    "fee_tokens": [
+      {
+        "denom": "anu",
+        "fixed_min_gas_price": 10000000,
+        "low_gas_price": 10000000,
+        "average_gas_price": 25000000,
+        "high_gas_price": 40000000
+      }
+    ]
+  },
+  "staking": {
+    "staking_tokens": [{ "denom": "anu" }]
+  },
+  "codebase": {
+    "git_repo": "https://github.com/nucash-mining/nuchain",
+    "recommended_version": "v0.1.0",
+    "compatible_versions": ["v0.1.0"],
+    "consensus": { "type": "cometbft" },
+    "sdk": { "type": "cosmos", "version": "v0.53" },
+    "evm": { "chain_id": 28277 }
+  },
+  "description": "nuChain — L2 zk-rollup EVM anchored to the WATTx chain. 1-second CometBFT finality, full EVM (cosmos/evm), IBC to the Cosmos ecosystem, LayerZero endpoints, and hardware-mineable zk validity proofs (Cysic). WTX bridges in as wWTX and travels Cosmos over IBC.",
+  "apis": {
+    "rpc": [{ "address": "http://127.0.0.1:26657", "provider": "localdev — public endpoints at testnet launch" }],
+    "rest": [{ "address": "http://127.0.0.1:1317", "provider": "localdev" }],
+    "grpc": [{ "address": "127.0.0.1:9090", "provider": "localdev" }],
+    "evm-http-jsonrpc": [{ "address": "http://127.0.0.1:18545", "provider": "localdev" }]
+  },
+  "keywords": ["evm", "zk-rollup", "wattx", "mining", "layerzero", "privacy"]
+}
