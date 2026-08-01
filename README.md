@@ -1,6 +1,6 @@
 # nuChain
 
-**An L2 zk-rollup EVM anchored to WATTx, native to the Cosmos ecosystem.**
+**The omnichain bridge hub — a Cosmos-SDK chain routing assets between WATTx, every EVM chain (LayerZero), and every Cosmos chain (IBC). Also a full zk-rollup EVM anchored to WATTx.**
 
 nuChain is a Cosmos SDK + CometBFT chain (~1-second finality) with a full EVM
 (cosmos/evm), IBC connectivity, LayerZero endpoints, and hardware-mineable zk
